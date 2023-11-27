@@ -26,4 +26,11 @@ public class MyBookStoreController : BookStoreController
         int i = await _bookAppService.CreateAsync(createBookDto);
         return 1;
     }
+
+    [Route("DeleteBook")]
+    [HttpGet]
+    public int DeleteBook(string Name)
+    {
+        return 1;
+    }
 }
