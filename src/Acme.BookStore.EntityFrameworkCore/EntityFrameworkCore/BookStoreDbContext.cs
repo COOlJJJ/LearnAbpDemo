@@ -25,6 +25,10 @@ public class BookStoreDbContext :
     IIdentityDbContext,
     ITenantManagementDbContext
 {
+
+    /*dotnet ef database update -c BookStoreDbContext */
+    //dotnet ef migrations add Created_Book_Entity --context BookStoreDbContext */
+
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
     #region Entities from the modules
     //Identity
@@ -71,6 +75,6 @@ public class BookStoreDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
- 
+
     }
 }
