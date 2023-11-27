@@ -1,5 +1,3 @@
-
-
 using System.Threading.Tasks;
 using Acme.BookStore.Books;
 using Microsoft.AspNetCore.Mvc;
@@ -8,18 +6,14 @@ namespace Acme.BookStore.Controllers;
 
 /* Inherit your controllers from this class.
  */
-[Controller]
-[Route("api/book/")]
-public class MyBookStoreController : BookStoreController
+// [ApiController]
+[ControllerName("TheMyBookStore")]
+[Route("api/book")]
+public class MyBookStoreController(IBookAppService bookAppService) : BookStoreController
 {
-    private readonly IBookAppService _bookAppService;
+    private readonly IBookAppService _bookAppService = bookAppService;
 
-    public MyBookStoreController(IBookAppService bookAppService)
-    {
-        _bookAppService = bookAppService;
-    }
-
-    [Route("GetMyBookName")]
+    [Route("getMyBookName")]
     [HttpGet]
     public async Task<int> GetMyBookName(CreateBookDto createBookDto)
     {
@@ -27,10 +21,11 @@ public class MyBookStoreController : BookStoreController
         return 1;
     }
 
-    [Route("DeleteBook")]
-    [HttpGet]
-    public int DeleteBook(string Name)
+    [Route("deleteBook")]
+    [HttpPost]
+    public async Task<int> DeleteBook(string Name)
     {
+        int i = await _bookAppService.DeleteBookByNameAsync(Name);
         return 1;
     }
 }
